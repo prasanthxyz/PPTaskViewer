@@ -10,13 +10,13 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:pptaskviewer.helloWorld"
+		"onCommand:pptaskviewer.viewTasks"
 	],
 	"main": "./extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "pptaskviewer.helloWorld",
+				"command": "pptaskviewer.viewTasks",
 				"title": "View Tasks"
 			}
 		]

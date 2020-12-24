@@ -10,21 +10,81 @@ const vscode = require('vscode');
  */
 function activate(context) {
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "pptaskviewer" is now active!');
+    // Use the console to output diagnostic information (console.log) and errors (console.error)
+    // This line of code will only be executed once when your extension is activated
+    console.log('Congratulations, your extension "pptaskviewer" is now active!');
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with  registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('pptaskviewer.helloWorld', function () {
-		// The code you place here will be executed every time your command is executed
+    // The command has been defined in the package.json file
+    // Now provide the implementation of the command with  registerCommand
+    // The commandId parameter must match the command field in package.json
+    let disposable = vscode.commands.registerCommand('pptaskviewer.viewTasks', function () {
+        // Get the active text editor
+        const editor = vscode.window.activeTextEditor;
 
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Testing from PPTaskViewer!');
-	});
+        if (editor) {
+            const document = editor.document;
+            const selection = editor.selection;
+            let content = "";
+            if (selection.start.line == selection.end.line && selection.start.character == selection.end.character) {
+                content = document.getText();
+            } else {
+                content = document.getText(selection);
+            }
 
-	context.subscriptions.push(disposable);
+            const dateRegex = /^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{2,4}/;
+            const taskRegex = /\[\[([^\]]*)\]\]/;
+            let lines = content.split(/\r?\n/).filter(line => line.length != 0);
+            let currentDate = null;
+            let taskMatch = null;
+            let note = "";
+            let task = "";
+            let data = {};
+            const unCategorized = "UNCATEGORIZED";
+
+            for (var line in lines) {
+                let currentLine = lines[line];
+                if (dateRegex.test(currentLine)) {
+                    currentDate = currentLine;
+                    continue;
+                }
+
+                if (!currentDate) {
+                    continue;
+                }
+
+                taskMatch = currentLine.match(taskRegex);
+                if (!taskMatch) {
+                    task = unCategorized;
+                    note = currentLine.trim();
+                } else {
+                    task = taskMatch[1];
+                    note = currentLine.replace(taskRegex, "").trim();
+                }
+
+                if (!(task in data)) {
+                    data[task] = []
+                }
+
+                data[task].push([currentDate, note]);
+            }
+
+            var summary = "";
+            let details = null;
+            for (let task in data) {
+                summary += task + "\n";
+                details = data[task];
+                for (let item in details) {
+                    summary += details[item][0] + " " + details[item][1] + "\n";
+                }
+                summary += "\n";
+            }
+
+            vscode.workspace.openTextDocument({content: summary})
+                .then(data => vscode.window.showTextDocument(data));
+        }
+    });
+
+    context.subscriptions.push(disposable);
 }
 exports.activate = activate;
 
@@ -32,6 +92,6 @@ exports.activate = activate;
 function deactivate() {}
 
 module.exports = {
-	activate,
-	deactivate
+    activate,
+    deactivate
 }
