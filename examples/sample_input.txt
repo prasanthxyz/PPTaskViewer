@@ -1,0 +1,39 @@
+12/24/2020
+    [[Frontend Work]]
+        Attended meeting with Robin
+            Decided to modify the source files
+            Going to use json instead of xml
+
+    [[Portal]]
+        Obtained the required permissions and started working on the portal
+
+    [[Random Bugs]]
+        Three bugs closed <link1> <link2> <link3>
+            Had access issues for <link2>
+        Standing accesses deleted from subscription
+
+12/23/2020
+    [[Portal]]
+        Created the required resources for the backend
+
+    [[Random Bugs]]
+        Closed two more bugs
+
+    [[Frontend Bugs]]
+        Closed the issue <link>
+        Had a meeting with QA for clarifying further actions and e-mailed the team
+
+    [[OnCall Work]]
+        Closed <issue link>
+
+12/22/2020
+    [[Frontend Work]]
+        Had meeting with Robin
+            Still to finalize on a storage system, analyzing xml vs json
+
+    [[Portal]]
+        Got list of required permissions, raised access requests
+
+    [[OnCall Work]]
+        Frontend issue came, closed it
+        Details are filled in <link>

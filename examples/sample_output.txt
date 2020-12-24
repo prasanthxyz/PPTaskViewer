@@ -1,0 +1,40 @@
+Work Progress by Tasks
+======================
+
+Frontend Work
+    12/24/2020
+        Attended meeting with Robin
+            Decided to modify the source files
+            Going to use json instead of xml
+    12/22/2020
+        Had meeting with Robin
+            Still to finalize on a storage system, analyzing xml vs json
+
+Portal
+    12/24/2020
+        Obtained the required permissions and started working on the portal
+    12/23/2020
+        Created the required resources for the backend
+    12/22/2020
+        Got list of required permissions, raised access requests
+
+Random Bugs
+    12/24/2020
+        Three bugs closed <link1> <link2> <link3>
+            Had access issues for <link2>
+        Standing accesses deleted from subscription
+    12/23/2020
+        Closed two more bugs
+
+Frontend Bugs
+    12/23/2020
+        Closed the issue <link>
+        Had a meeting with QA for clarifying further actions and e-mailed the team
+
+OnCall Work
+    12/23/2020
+        Closed <issue link>
+    12/22/2020
+        Frontend issue came, closed it
+        Details are filled in <link>
+

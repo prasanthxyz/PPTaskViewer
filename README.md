@@ -1,65 +1,35 @@
-# pptaskviewer README
+# PP Task Viewer
 
-This is the README for your extension "pptaskviewer". After writing up a brief description, we recommend including the following sections.
+View tasks by Project, provided they're organized by date in a given format.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+Processes a daily work log in an expected format (sample given below) and provides a task-based view for the data.
 
-For example if there is an image subfolder under your extension project workspace:
+The idea is keeping a daily work log, updated every time some work is done.
+All log/notes/updates are tagged to a particular task.
+The extension basically processes this log, and shows daily updates/notes grouped by task.
+The use case is where you need some interval, say last week's updats **for some particular task**.
+That is, instead of a combined log of all tasks you can easily fitler out the logs of one task.
 
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+# Sample input file
+![Input](images/input.png)
+# Sample output 
+![Output](images/output.png)
+# Operation
+![Operation](images/operation.gif)
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+Spaces/tabs as provided in the sample work-log is totally optional. I used it for a better visual hierarchy.
 
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
+The log file date-format should be in the given format (00/00/0000), both MM/DD/YYYY and DD/MM/YYYY are supported.
+Task name should be enclosed in double square brackets like this: [[TASK TAG]]
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
-
 ### 1.0.0
 
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+Initial release of PP Task Viewer
 
 -----------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**

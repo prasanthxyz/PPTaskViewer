@@ -1,8 +1,8 @@
 {
 	"name": "pptaskviewer",
 	"displayName": "PPTaskViewer",
-	"description": "View Tasks per date and per project",
-	"version": "0.0.1",
+	"description": "View Tasks per project",
+	"version": "1.0.0",
 	"engines": {
 		"vscode": "^1.52.0"
 	},
