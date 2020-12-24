@@ -2,6 +2,13 @@
 
 View tasks by Project, provided they're organized by date in a given format.
 
+## Installation
+> Ctrl + Shift + P
+
+> ext install
+
+> prasanthxyz.pptaskviewer
+
 ## Features
 
 Processes a daily work log in an expected format (sample given below) and provides a task-based view for the data.
@@ -32,4 +39,6 @@ Task name should be enclosed in double square brackets like this: [[TASK TAG]]
 
 Initial release of PP Task Viewer
 
------------------------------------------------------------------------------------------------------------
+### 1.0.1
+
+Published, added installation instructions
