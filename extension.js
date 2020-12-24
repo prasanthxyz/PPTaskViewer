@@ -9,72 +9,66 @@ const vscode = require('vscode');
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-
-    // Use the console to output diagnostic information (console.log) and errors (console.error)
-    // This line of code will only be executed once when your extension is activated
-    console.log('Congratulations, your extension "pptaskviewer" is now active!');
-
-    // The command has been defined in the package.json file
-    // Now provide the implementation of the command with  registerCommand
-    // The commandId parameter must match the command field in package.json
     let disposable = vscode.commands.registerCommand('pptaskviewer.viewTasks', function () {
         // Get the active text editor
         const editor = vscode.window.activeTextEditor;
 
         if (editor) {
-            const document = editor.document;
-            const selection = editor.selection;
-            let content = "";
-            if (selection.start.line == selection.end.line && selection.start.character == selection.end.character) {
-                content = document.getText();
-            } else {
-                content = document.getText(selection);
-            }
+            const content = editor.document.getText();
 
             const dateRegex = /^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{2,4}/;
             const taskRegex = /\[\[([^\]]*)\]\]/;
+
             let lines = content.split(/\r?\n/).filter(line => line.length != 0);
             let currentDate = null;
+            let currentTask = null;
             let taskMatch = null;
-            let note = "";
-            let task = "";
             let data = {};
-            const unCategorized = "UNCATEGORIZED";
 
             for (var line in lines) {
                 let currentLine = lines[line];
+
+                // check for date
                 if (dateRegex.test(currentLine)) {
-                    currentDate = currentLine;
+                    currentDate = currentLine.trim();
+                    currentTask = null;
                     continue;
                 }
-
+                // continue if no valid date had been found yet
                 if (!currentDate) {
                     continue;
                 }
 
+                // check for task
                 taskMatch = currentLine.match(taskRegex);
-                if (!taskMatch) {
-                    task = unCategorized;
-                    note = currentLine.trim();
-                } else {
-                    task = taskMatch[1];
-                    note = currentLine.replace(taskRegex, "").trim();
+                if (taskMatch) {
+                    currentTask = taskMatch[1];
+                    continue;
+                }
+                // continue if no valid task had been found yet
+                if (!currentTask) {
+                    continue;
                 }
 
-                if (!(task in data)) {
-                    data[task] = []
+                if (!(currentTask in data)) {
+                    data[currentTask] = {};    
+                }
+                if (!(currentDate in data[currentTask])) {
+                    data[currentTask][currentDate] = [];
                 }
 
-                data[task].push([currentDate, note]);
+                data[currentTask][currentDate].push([currentLine]);
             }
 
-            var summary = "";
+            var summary = "Work Progress by Tasks\n======================\n\n";
             let details = null;
             for (let task in data) {
                 summary += task + "\n";
-                details = data[task];
-                for (let item in details) {
-                    summary += details[item][0] + " " + details[item][1] + "\n";
+                for (let date in data[task]) {
+                    summary += "    " + date + "\n";
+                    for (let noteI in data[task][date]) {
+                        summary += data[task][date][noteI] + "\n";
+                    }
                 }
                 summary += "\n";
             }
